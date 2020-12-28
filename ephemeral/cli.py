@@ -6,12 +6,7 @@ import sys
 def main():
     """Console script for ephemeral."""
     parser = argparse.ArgumentParser()
-    parser.add_argument('_', nargs='*')
-    args = parser.parse_args()
-
-    print("Arguments: " + str(args._))
-    print("Replace this message by putting your code into "
-          "ephemeral.cli.main")
+    parser.add_argument("")
     return 0
 
 
