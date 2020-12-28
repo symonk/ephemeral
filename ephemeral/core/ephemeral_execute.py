@@ -1,7 +1,20 @@
+from typing import Optional
+from typing import Sequence
+
 from ephemeral import Configuration
-from ephemeral import empheral_hookimpl
+from ephemeral import ephemeral_hookimpl
+from ephemeral.scanner import PortScanner
 
 
-@empheral_hookimpl
-def execute(config: Configuration) -> None:
+@ephemeral_hookimpl
+def ephemeral_execute(config: Configuration) -> Sequence[Optional[int]]:
     config.terminal_writer.announce_execute()
+    scanner = PortScanner(
+        config.target,
+        config.port_range,
+        config.quick,
+        config.random,
+        config.thread_count,
+    )
+    ports = scanner.attack()
+    return ports

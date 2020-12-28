@@ -9,21 +9,24 @@ class TerminalWriter:
         self.options = options
 
     def announce_setup(self) -> None:
-        self.print_in_color(
-            Fore.GREEN, f"[Ephemeral setup started at: {self._get_datetime_now()}]"
-        )
+        print(f"Ephemeral setup started at: {self._get_datetime_now()}")
         for setting, value in self.options.items():
-            print(f"**** [{setting} = {value}] *****")
+            print(
+                f"**** [{Fore.BLUE + setting + Fore.RESET} = {Fore.GREEN + str(value) + Fore.RESET}] *****"
+            )
 
     @staticmethod
     def _get_datetime_now() -> str:
         return datetime.now().strftime("%d-%m-%Y @ %H:%M:%S")
 
     def announce_execute(self) -> None:
-        self.print_in_color(Fore.GREEN, "[Ephemeral execution has begun...")
+        print(f"Ephemeral Execution stage... : {self._get_datetime_now()}")
 
     def announce_teardown(self):
-        print(f"[Ephemeral teardown has completed at: {self._get_datetime_now()}]")
+        print(f"Ephemeral teardown stage... : {self._get_datetime_now()}")
+
+    def announce_report(self):
+        print(f"Ephemeral reporting stage... {self._get_datetime_now()}]")
 
     @staticmethod
     def print_in_color(color: Fore, message: str) -> None:

@@ -1,3 +1,5 @@
-#!/usr/bin/env python
+import ephemeral
 
-"""Tests for `ephemeral` package."""
+
+def test_stub():
+    assert ephemeral.NAME == "Ephemeral"

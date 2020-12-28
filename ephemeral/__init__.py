@@ -12,7 +12,7 @@ from .configuration import Configuration
 colorama.init()
 NAME = "Ephemeral"
 
-empheral_hookspec = pluggy.HookspecMarker(NAME)
-empheral_hookimpl = pluggy.HookimplMarker(NAME)
+ephemeral_hookspec = pluggy.HookspecMarker(NAME)
+ephemeral_hookimpl = pluggy.HookimplMarker(NAME)
 
-__all__ = ["Configuration", "NAME", "empheral_hookspec", "empheral_hookimpl"]
+__all__ = ["Configuration", "NAME", "ephemeral_hookspec", "ephemeral_hookimpl"]
