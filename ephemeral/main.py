@@ -2,34 +2,35 @@
 import argparse
 import sys
 
+from ephemeral import Configuration
+
 
 def main():
     """Console script for ephemeral."""
     welcome()
-    namespace = generate_arg_namespace()
-    generate_namespace_output(namespace)
+    ephemeral_config = Configuration(generate_arg_namespace())
+    ephemeral_config.setup()
+
+    ephemeral_config.teardown()
     return 0
 
 
 def generate_arg_namespace() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "target", action="store", help="The target host to inspect available ports of."
+        "--target",
+        action="store",
+        help="The target host to inspect available ports of.",
     )
     parser.add_argument(
-        "-v", "--verbose", action="count", help="Level of verbosity, 0 (default)...5"
+        "-v",
+        "--verbose",
+        action="count",
+        default=0,
+        help="Level of verbosity, 0 (default)...5",
+        dest="verbosity",
     )
     return parser.parse_args()
-
-
-def generate_namespace_output(namespace: argparse.Namespace) -> None:
-    for item in vars(namespace).values():
-        print_kv(item)
-
-
-def print_kv(arg_data: str) -> None:
-    key, value = arg_data.split("=")
-    print(f"**** [{key} = {value}] *****")
 
 
 def welcome() -> None:
@@ -43,7 +44,7 @@ def welcome() -> None:
  |_____| .__/|_| |_|\___|_| |_| |_|\___|_|  \__,_|_|
        |_|
   ===================================================
-  Ephemeral: Powerful python port scanner, configuration summary is below:
+  Ephemeral: Powerful python port scanner!
     """
     )
 
