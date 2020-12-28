@@ -12,5 +12,5 @@ def ephemeral_report(config: Configuration, ports: Sequence[Optional[int]]) -> N
     config.terminal_writer.announce_report()
     for port in ports:
         print(
-            f" **** Port: {Fore.GREEN + port + Fore.RESET} is open and potentially {Fore.RED} vulnerable! {Fore.RESET}"
+            f" **** Port: {Fore.GREEN + str(port) + Fore.RESET} is potentially {Fore.RED} vulnerable! {Fore.RESET}"
         )
