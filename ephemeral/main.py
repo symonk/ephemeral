@@ -20,7 +20,9 @@ def main():
     _register_core_plugins(plugin_manager)
     if ephemeral_config.verbose:
         for plugin in plugin_manager.get_plugins():
-            print(f"Plugin Registered => {Fore.GREEN + plugin.__name__ + Fore.RESET}")
+            print(
+                f"**** Plugin Registered => {Fore.GREEN + plugin.__name__ + Fore.RESET}"
+            )
     plugin_manager.hook.ephemeral_setup(config=ephemeral_config)
     ports = plugin_manager.hook.ephemeral_execute(config=ephemeral_config)
     plugin_manager.hook.ephemeral_teardown(config=ephemeral_config, ports=ports)
@@ -89,14 +91,14 @@ def generate_arg_namespace() -> argparse.Namespace:
 def welcome() -> None:
     print(
         fr"""
- =================================================== {Fore.LIGHTBLUE_EX}
-  _____       _                                   _
- | ____|_ __ | |__   ___ _ __ ___   ___ _ __ __ _| |
- |  _| | '_ \| '_ \ / _ \ '_ ` _ \ / _ \ '__/ _` | |
- | |___| |_) | | | |  __/ | | | | |  __/ | | (_| | |
- |_____| .__/|_| |_|\___|_| |_| |_|\___|_|  \__,_|_|
-       |_|
- {Fore.RESET} =================================================== {Fore.WHITE}
+=================================================== {Fore.LIGHTBLUE_EX}
+ _____       _                                   _
+| ____|_ __ | |__   ___ _ __ ___   ___ _ __ __ _| |
+|  _| | '_ \| '_ \ / _ \ '_ ` _ \ / _ \ '__/ _` | |
+| |___| |_) | | | |  __/ | | | | |  __/ | | (_| | |
+|_____| .__/|_| |_|\___|_| |_| |_|\___|_|  \__,_|_|
+   |_|
+{Fore.RESET} =================================================== {Fore.WHITE}
   Ephemeral: Powerful python port scanner, https://github.com/symonk/ephemeral
     """,
         Fore.RESET,
