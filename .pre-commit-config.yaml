@@ -25,6 +25,8 @@ repos:
       rev: ''
       hooks:
       -   id: isort
+          args:
+              - '--sl'
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: ''
     hooks:

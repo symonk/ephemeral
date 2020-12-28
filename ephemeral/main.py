@@ -2,12 +2,22 @@
 import argparse
 import sys
 
+import pluggy
+from colorama import Fore
+
+from ephemeral import NAME
 from ephemeral import Configuration
+from ephemeral.hooks import hookspec
 
 
 def main():
     """Console script for ephemeral."""
     welcome()
+    pm = pluggy.PluginManager(NAME)
+    pm.add_hookspecs(hookspec)
+
+    # Get the built in 'core' plugins, note user defined plugins can implement their own functionality!
+
     ephemeral_config = Configuration(generate_arg_namespace())
     ephemeral_config.setup()
     ephemeral_config.execute()
@@ -41,17 +51,18 @@ def generate_arg_namespace() -> argparse.Namespace:
 
 def welcome() -> None:
     print(
-        r"""
- ===================================================
+        fr"""
+ =================================================== {Fore.LIGHTBLUE_EX}
   _____       _                                   _
  | ____|_ __ | |__   ___ _ __ ___   ___ _ __ __ _| |
  |  _| | '_ \| '_ \ / _ \ '_ ` _ \ / _ \ '__/ _` | |
  | |___| |_) | | | |  __/ | | | | |  __/ | | (_| | |
  |_____| .__/|_| |_|\___|_| |_| |_|\___|_|  \__,_|_|
        |_|
-  ===================================================
+ {Fore.RESET} =================================================== {Fore.WHITE}
   Ephemeral: Powerful python port scanner!
-    """
+    """,
+        Fore.RESET,
     )
 
 
