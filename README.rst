@@ -26,16 +26,14 @@ Port scanning made easy with python
 * Free software: MIT license
 * Documentation: https://ephemeral.readthedocs.io.
 
+--------
+Disclaimer
+--------
+Do **not** use this against any environment in which you do not have complete, explicit permission to conduct such scanning.
 
 Features
 --------
 
-* TODO
-
-Credits
--------
-
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
-
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+* Simple port scanning
+* Powerful customisations
+* Result dispatching
