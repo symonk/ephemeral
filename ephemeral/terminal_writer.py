@@ -19,7 +19,7 @@ class TerminalWriter:
     def _get_datetime_now() -> str:
         return datetime.now().strftime("%d-%m-%Y @ %H:%M:%S")
 
-    def announce_execution(self) -> None:
+    def announce_execute(self) -> None:
         self.print_in_color(Fore.GREEN, "[Ephemeral execution has begun...")
 
     def announce_teardown(self):
