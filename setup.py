@@ -33,7 +33,7 @@ setup(
         "Programming Language :: Python :: 3.8",
     ],
     description="Port scanning made easy with python",
-    entry_points={"console_scripts": ["ephemeral=ephemeral.cli:main"]},
+    entry_points={"console_scripts": ["ephemeral=ephemeral.main:main"]},
     install_requires=requirements,
     license="MIT license",
     long_description=readme + "\n\n" + history,
