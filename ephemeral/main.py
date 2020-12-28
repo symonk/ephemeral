@@ -10,7 +10,7 @@ def main():
     welcome()
     ephemeral_config = Configuration(generate_arg_namespace())
     ephemeral_config.setup()
-
+    ephemeral_config.execute()
     ephemeral_config.teardown()
     return 0
 
@@ -30,6 +30,12 @@ def generate_arg_namespace() -> argparse.Namespace:
         help="Level of verbosity, 0 (default)...5",
         dest="verbosity",
     )
+    args = parser.parse_args()
+    if args.target is None:
+        print(
+            "Ephemeral will terminate early, no --target was provided, please pass one in."
+        )
+        sys.exit(1)
     return parser.parse_args()
 
 

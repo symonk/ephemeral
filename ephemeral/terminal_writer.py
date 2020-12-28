@@ -3,19 +3,18 @@ from typing import Mapping
 
 
 class TerminalWriter:
-    @staticmethod
-    def setup(namespace: Mapping[str, str]) -> None:
-        print(
-            f"[Ephemeral setup started at: {datetime.now().strftime('%d-%m-%Y @ %H:%M:%S')}]"
-        )
+    def announce_setup(self, namespace: Mapping[str, str]) -> None:
+        print(f"[Ephemeral setup started at: {self._get_datetime_now()}]")
         for setting, value in namespace.items():
             print(f"**** [{setting} = {value}] *****")
 
-    def _print_time_information(self) -> None:
-        ...
+    @staticmethod
+    def _get_datetime_now() -> str:
+        return datetime.now().strftime("%d-%m-%Y @ %H:%M:%S")
 
-    def teardown(self):
-        ...
+    @staticmethod
+    def announce_execution() -> None:
+        print("[Ephemeral execution has begun...")
 
-    def print_key_value(self):
-        ...
+    def announce_teardown(self):
+        print(f"[Ephemeral teardown has completed at: {self._get_datetime_now()}]")
