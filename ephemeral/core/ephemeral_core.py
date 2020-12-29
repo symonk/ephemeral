@@ -48,6 +48,8 @@ class EphemeralCorePlugin:
             print(
                 f" **** Port: {Fore.GREEN + str(port) + Fore.RESET} is potentially {Fore.RED} vulnerable! {Fore.RESET}"
             )
+        a = 1
+        b = 2
 
     @staticmethod
     def _get_datetime_now() -> str:
