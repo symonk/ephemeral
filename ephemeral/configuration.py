@@ -223,7 +223,7 @@ class Configuration:
     ) -> None:
         self.verbose = verbose
         self.target = target
-        self.port_range = port_range or range(0, 2 ** 16) if not quick else QUICK_PORTS
+        self.port_range = port_range or range(2 ** 16) if not quick else QUICK_PORTS
         self.quick = quick
         self.random = random
         self.thread_count = thread_count
