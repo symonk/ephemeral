@@ -13,10 +13,13 @@ ephemeral
         :target: https://ephemeral.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-
 .. image:: https://pyup.io/repos/github/symonk/ephemeral/shield.svg
      :target: https://pyup.io/repos/github/symonk/ephemeral/
      :alt: Updates
+
+.. image:: https://results.pre-commit.ci/badge/github/symonk/ephemeral/master.svg
+   :target: https://results.pre-commit.ci/latest/github/symonk/ephemeral/master
+   :alt: pre-commit.ci status
 
 
 
