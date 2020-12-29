@@ -36,7 +36,7 @@ class EphemeralCorePlugin:
 
     @ephemeral_hookimpl
     def ephemeral_execute(self) -> Sequence[Optional[int]]:
-        return self.scanner.attack()
+        return self.scanner.attack(self.config.random)
 
     @ephemeral_hookimpl
     def ephemeral_teardown(self) -> Sequence[Optional[int]]:
@@ -44,7 +44,6 @@ class EphemeralCorePlugin:
 
     @ephemeral_hookimpl
     def ephemeral_report(self, ports: Sequence[Optional[int]]) -> None:
-        print(f"Ephemeral reporting stage... {self._get_datetime_now()}]")
         for port in ports:
             print(
                 f" **** Port: {Fore.GREEN + str(port) + Fore.RESET} is potentially {Fore.RED} vulnerable! {Fore.RESET}"
