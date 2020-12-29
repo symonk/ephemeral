@@ -30,9 +30,12 @@ def _register_core_plugins(
     config: Configuration, plugin_manager: PluginManager
 ) -> None:
     from ephemeral.core.ephemeral_core import EphemeralCorePlugin
+    from ephemeral.core.ephemeral_csv import EphemeralCSVPlugin
 
     core_plugin = EphemeralCorePlugin(config, plugin_manager)
+    csv_plugin = EphemeralCSVPlugin(config, plugin_manager)
     plugin_manager.register(plugin=core_plugin, name=core_plugin.name)
+    plugin_manager.register(plugin=csv_plugin, name=csv_plugin.name)
 
 
 def generate_config_dict(plugin_manager: PluginManager) -> Configuration:
