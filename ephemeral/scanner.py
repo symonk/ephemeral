@@ -25,7 +25,7 @@ class PortScanner:
         self.quick = quick
         self.random = random
         self.thread_count = thread_count
-        self.ports_queue: Queue = Queue(maxsize=socket.SOL_SOCKET + 1)
+        self.ports_queue: Queue = Queue()
 
     @stdout_scan_time
     def attack(self) -> List[Optional[int]]:
