@@ -20,6 +20,6 @@ class EphemeralCSVPlugin:
         if vulnerable_ports and self.config.write_vulnerable:
             print("**** Writing vulnerable ports to disk, see: `vulnerable_ports.csv`")
             with open("vulnerable_ports.csv", "w") as f:
-                f.write(f"[Target]={self.config.target}")
+                f.write(f"[Target]: {self.config.target}\n")
                 f.write(", ".join([str(port) for port in vulnerable_ports]))
         return vulnerable_ports

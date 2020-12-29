@@ -67,7 +67,7 @@ def generate_config_dict(plugin_manager: PluginManager) -> Configuration:
         dest="random",
     )
     parser.add_argument(
-        "--tc",
+        "-tc",
         "--thread-count",
         action="store",
         type=int,
@@ -76,7 +76,7 @@ def generate_config_dict(plugin_manager: PluginManager) -> Configuration:
         dest="thread_count",
     )
     parser.add_argument(
-        "--pr",
+        "-pr",
         "--ports",
         action="store",
         type=int,
