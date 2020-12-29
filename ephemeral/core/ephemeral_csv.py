@@ -1,4 +1,3 @@
-import os
 from typing import Optional
 from typing import Sequence
 
@@ -19,10 +18,7 @@ class EphemeralCSVPlugin:
         self, vulnerable_ports: Sequence[Optional[int]]
     ) -> Sequence[Optional[int]]:
         if vulnerable_ports and self.config.write_vulnerable:
-            cwd = os.path.dirname(os.path.realpath(__file__))
-            print(
-                f"**** Writing vulnerable ports to disk, see: {os.path.join(cwd, 'vulnerable_ports.csv')}"
-            )
+            print("**** Writing vulnerable ports to disk, see: `vulnerable_ports.csv`")
             with open("vulnerable_ports.csv", "w") as f:
                 f.write(f"[Target]={self.config.target}")
                 f.write(", ".join([str(port) for port in vulnerable_ports]))
