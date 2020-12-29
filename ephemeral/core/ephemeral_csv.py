@@ -16,9 +16,9 @@ class EphemeralCSVPlugin:
 
     @ephemeral_hookimpl
     def ephemeral_teardown(
-        self, vulnerable_ports: Sequence[Optional[int]], config: Configuration
+        self, vulnerable_ports: Sequence[Optional[int]]
     ) -> Sequence[Optional[int]]:
-        if vulnerable_ports:
+        if vulnerable_ports and self.config.write_vulnerable:
             cwd = os.path.dirname(os.path.realpath(__file__))
             print(
                 f"**** Writing vulnerable ports to disk, see: {os.path.join(cwd, 'vulnerable_ports.csv')}"
