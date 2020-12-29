@@ -40,3 +40,4 @@ Features
 * Simple port scanning
 * Powerful customisations
 * Result dispatching
+* Hook based extendibility
