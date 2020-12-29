@@ -50,6 +50,6 @@ class PortScanner:
     def scan_port(self, port: int) -> Optional[int]:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             result = s.connect_ex((self.target, port))
-            if result == 0:
+            if not result:
                 return port
         return None

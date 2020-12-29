@@ -16,7 +16,7 @@ def stdout_scan_time(f):
     def wrapper(*args, **kwargs):
         start = time.time()
         result = f(*args, **kwargs)
-        print(f"***** Port scanning took: {int(time.time() - start)} seconds.")
+        print(f"**** Port scanning took: {int(time.time() - start)} seconds.")
         return result
 
     return wrapper

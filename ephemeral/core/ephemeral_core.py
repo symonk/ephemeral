@@ -25,7 +25,7 @@ class EphemeralCorePlugin:
 
     @ephemeral_hookimpl
     def ephemeral_setup(self) -> None:
-        print(f"**** Ephemeral setup started at: {self._get_datetime_now()}")
+        print(f"**** Ephemeral started at: {self._get_datetime_now()}")
         ignored = ("plugin_manager",)
         for setting, value in {
             k: v for k, v in vars(self.config).items() if k not in ignored
@@ -44,10 +44,9 @@ class EphemeralCorePlugin:
 
     @ephemeral_hookimpl
     def ephemeral_report(self, ports: Sequence[Optional[int]]) -> None:
-        for port in ports:
-            print(
-                f" **** Port: {Fore.GREEN + str(port) + Fore.RESET} is potentially {Fore.RED} vulnerable! {Fore.RESET}"
-            )
+        print(
+            f"**** {Fore.RED}Vulnerable {Fore.RESET}ports => {Fore.YELLOW} {list(ports)} {Fore.RESET}"
+        )
 
     @staticmethod
     def _get_datetime_now() -> str:
