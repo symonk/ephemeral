@@ -1,13 +1,11 @@
 from datetime import datetime
 from typing import Optional
 from typing import Sequence
-
-from colorama import Fore
-from pluggy import PluginManager
-
 from ephemeral import Configuration
 from ephemeral import ephemeral_hookimpl
 from ephemeral.scanner import PortScanner
+from colorama import Fore
+from pluggy import PluginManager
 
 
 class EphemeralCorePlugin:
@@ -48,8 +46,6 @@ class EphemeralCorePlugin:
             print(
                 f" **** Port: {Fore.GREEN + str(port) + Fore.RESET} is potentially {Fore.RED} vulnerable! {Fore.RESET}"
             )
-        a = 1
-        b = 2
 
     @staticmethod
     def _get_datetime_now() -> str:
