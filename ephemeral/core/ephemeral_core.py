@@ -26,19 +26,20 @@ class EphemeralCorePlugin:
     @ephemeral_hookimpl
     def ephemeral_setup(self) -> None:
         print(f"**** Ephemeral setup started at: {self._get_datetime_now()}")
-        for setting, value in self.config.__dict__.items():
+        ignored = ("plugin_manager",)
+        for setting, value in {
+            k: v for k, v in vars(self.config).items() if k not in ignored
+        }.items():
             print(
                 f"**** [{Fore.BLUE + setting + Fore.RESET} = {Fore.GREEN + str(value) + Fore.RESET}] *****"
             )
 
     @ephemeral_hookimpl
     def ephemeral_execute(self) -> Sequence[Optional[int]]:
-        print(f"**** Ephemeral Execution stage... : {self._get_datetime_now()}")
         return self.scanner.attack()
 
     @ephemeral_hookimpl
     def ephemeral_teardown(self) -> Sequence[Optional[int]]:
-        print(f"**** Ephemeral teardown stage... : {self._get_datetime_now()}")
         return []
 
     @ephemeral_hookimpl
