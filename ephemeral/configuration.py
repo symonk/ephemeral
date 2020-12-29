@@ -220,6 +220,7 @@ class Configuration:
         random: bool,
         thread_count: bool,
         plugin_manager: pluggy.PluginManager,
+        write_vulnerable: bool,
     ) -> None:
         self.verbose = verbose
         self.target = target
@@ -228,3 +229,4 @@ class Configuration:
         self.random = random
         self.thread_count = thread_count
         self.plugin_manager = plugin_manager
+        self.write_vulnerable = write_vulnerable

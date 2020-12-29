@@ -17,12 +17,11 @@ def main():
     plugin_manager.add_hookspecs(hookspec)
     ephemeral_config = generate_config_dict(plugin_manager)
     _register_core_plugins(ephemeral_config, plugin_manager)
-    if ephemeral_config.verbose:
-        for plugin in plugin_manager.get_plugins():
-            print(f"**** Plugin Registered => {Fore.GREEN + plugin.name + Fore.RESET}")
     plugin_manager.hook.ephemeral_setup(config=ephemeral_config)
     ports = plugin_manager.hook.ephemeral_execute(config=ephemeral_config)
-    plugin_manager.hook.ephemeral_teardown(config=ephemeral_config, ports=ports)
+    plugin_manager.hook.ephemeral_teardown(
+        config=ephemeral_config, vulnerable_ports=ports
+    )
     plugin_manager.hook.ephemeral_report(config=ephemeral_config, ports=ports)
     return 0
 
@@ -82,6 +81,15 @@ def generate_config_dict(plugin_manager: PluginManager) -> Configuration:
         help="Specify the port range to perform a scan on.",
         dest="port_range",
     )
+    parser.add_argument(
+        "-wv",
+        "--write-vulnerable",
+        action="store_true",
+        default=False,
+        help="If vulnerable ports are detected; write them to csv in the cwd",
+        dest="write_vulnerable",
+    )
+
     namespace = parser.parse_args()
     keyword_args = vars(namespace)
     keyword_args["plugin_manager"] = plugin_manager

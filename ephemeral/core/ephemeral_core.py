@@ -39,7 +39,9 @@ class EphemeralCorePlugin:
         return self.scanner.attack(self.config.random)
 
     @ephemeral_hookimpl
-    def ephemeral_teardown(self) -> Sequence[Optional[int]]:
+    def ephemeral_teardown(
+        self, vulnerable_ports: Sequence[Optional[int]]
+    ) -> Sequence[Optional[int]]:
         return []
 
     @ephemeral_hookimpl
