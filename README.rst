@@ -1,3 +1,8 @@
+<kbd>
+  <img src="https://github.com/symonk/zonic/blob/master/.github/images/logo.png">
+</kbd>
+  <p></p>
+
 =========
 zonic
 =========
