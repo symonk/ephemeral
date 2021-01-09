@@ -6,16 +6,16 @@ from typing import Sequence
 from colorama import Fore
 from pluggy import PluginManager
 
-from sonic import Configuration
-from sonic import sonic_hookimpl
-from sonic.scanner import PortScanner
+from zonic import Configuration
+from zonic import zonic_hookimpl
+from zonic.scanner import PortScanner
 
 
-class SonicCorePlugin:
+class ZonicCorePlugin:
     def __init__(self, config: Configuration, plugin_manager: PluginManager) -> None:
         self.config = config
         self.plugin_manager = plugin_manager
-        self.name = "Sonics Base Plugin"
+        self.name = "Zonics Base Plugin"
         self.scanner = PortScanner(
             config.target,
             config.port_range,
@@ -24,9 +24,9 @@ class SonicCorePlugin:
             config.thread_count,
         )
 
-    @sonic_hookimpl
-    def sonic_setup(self) -> None:
-        print(f"**** Sonic started at: {self._get_datetime_now()}")
+    @zonic_hookimpl
+    def zonic_setup(self) -> None:
+        print(f"**** zonic started at: {self._get_datetime_now()}")
         ignored = ("plugin_manager",)
         for setting, value in {
             k: v for k, v in vars(self.config).items() if k not in ignored
@@ -35,18 +35,18 @@ class SonicCorePlugin:
                 f"**** [{Fore.BLUE + setting + Fore.RESET} = {Fore.GREEN + str(value) + Fore.RESET}] *****"
             )
 
-    @sonic_hookimpl
-    def sonic_execute(self) -> Sequence[Optional[int]]:
+    @zonic_hookimpl
+    def zonic_execute(self) -> Sequence[Optional[int]]:
         return self.scanner.attack(self.config.get_option("random"))
 
-    @sonic_hookimpl
-    def sonic_teardown(
+    @zonic_hookimpl
+    def zonic_teardown(
         self, vulnerable_ports: Sequence[Optional[int]]
     ) -> Sequence[Optional[int]]:
         return []
 
-    @sonic_hookimpl
-    def sonic_report(self, ports: Sequence[Optional[int]]) -> None:
+    @zonic_hookimpl
+    def zonic_report(self, ports: Sequence[Optional[int]]) -> None:
         print(
             f"**** {Fore.RED}Vulnerable {Fore.RESET}ports => {Fore.YELLOW} {list(ports)} {Fore.RESET}"
         )

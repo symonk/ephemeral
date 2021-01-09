@@ -9,7 +9,7 @@ from typing import Optional
 
 from halo import Halo
 
-from sonic.decorators import stdout_scan_time
+from zonic.decorators import stdout_scan_time
 
 
 class PortScanner:

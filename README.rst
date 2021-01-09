@@ -1,20 +1,20 @@
 =========
-sonic
+zonic
 =========
 
 
-.. image:: https://img.shields.io/pypi/v/sonic.svg
-        :target: https://pypi.python.org/pypi/sonic
+.. image:: https://img.shields.io/pypi/v/zonic.svg
+        :target: https://pypi.python.org/pypi/zonic
 
-.. image:: https://img.shields.io/travis/symonk/sonic.svg
-        :target: https://travis-ci.com/symonk/sonic
+.. image:: https://img.shields.io/travis/symonk/zonic.svg
+        :target: https://travis-ci.com/symonk/zonic
 
-.. image:: https://readthedocs.org/projects/sonic/badge/?version=latest
-        :target: https://sonic.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/zonic/badge/?version=latest
+        :target: https://zonic.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/symonk/sonic/shield.svg
-     :target: https://pyup.io/repos/github/symonk/sonic/
+.. image:: https://pyup.io/repos/github/symonk/zonic/shield.svg
+     :target: https://pyup.io/repos/github/symonk/zonic/
      :alt: Updates
 
 .. image:: https://results.pre-commit.ci/badge/github/symonk/sonic/master.svg

@@ -1,1 +1,1 @@
-"""Unit test package for sonic."""
+"""Unit test package for zonic."""

@@ -1,12 +1,12 @@
 [paths]
 source =
-   sonic
+   zonic
    */site-packages
 
 [run]
 branch = true
 source =
-    sonic
+    zonic
     tests
 parallel = true
 

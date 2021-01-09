@@ -1,15 +1,15 @@
-"""Console script for sonic."""
+"""Console script for zonic."""
 import argparse
 import sys
 
 from colorama import Fore
 from pluggy import PluginManager
 
-from sonic import Configuration
-from sonic import plugin_manager
+from zonic import Configuration
+from zonic import plugin_manager
 
 
-def sonic_add_options(parser: argparse.ArgumentParser) -> None:
+def zonic_add_options(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--target",
         action="store",
@@ -19,7 +19,7 @@ def sonic_add_options(parser: argparse.ArgumentParser) -> None:
         "-v",
         "--verbose",
         action="store_true",
-        help="Run sonic in verbose mode",
+        help="Run zonic in verbose mode",
         dest="verbose",
     )
     parser.add_argument(
@@ -67,19 +67,19 @@ def sonic_add_options(parser: argparse.ArgumentParser) -> None:
 def main():
     welcome()
     parser = argparse.ArgumentParser()
-    plugin_manager.register(__file__, "sonic_main")
-    plugin_options = plugin_manager.hook.sonic_add_options(parser=parser)
+    plugin_manager.register(__file__, "zonic_main")
+    plugin_options = plugin_manager.hook.zonic_add_options(parser=parser)
     return 0
 
 
 def _register_core_plugins(
     config: Configuration, plugin_manager: PluginManager
 ) -> None:
-    from sonic.core.sonic_core import SonicCorePlugin
-    from sonic.core.sonic_csv import SonicCSVPlugin
+    from zonic.core.zonic_core import ZonicCorePlugin
+    from zonic.core.zonic_csv import ZonicCSVPlugin
 
-    core_plugin = SonicCorePlugin(config, plugin_manager)
-    csv_plugin = SonicCSVPlugin(config, plugin_manager)
+    core_plugin = ZonicCorePlugin(config, plugin_manager)
+    csv_plugin = ZonicCSVPlugin(config, plugin_manager)
     plugin_manager.register(plugin=core_plugin, name=core_plugin.name)
     plugin_manager.register(plugin=csv_plugin, name=csv_plugin.name)
 
@@ -95,7 +95,7 @@ def welcome() -> None:
 /____/\____/_/ /_/_/\___/
 
 {Fore.RESET} =================== {Fore.WHITE}
-  sonic: Powerful python port scanner, https://github.com/symonk/sonic
+  zonic: Powerful python port scanner, https://github.com/symonk/zonic
     """,
         Fore.RESET,
     )

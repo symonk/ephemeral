@@ -1,4 +1,4 @@
-"""Top-level package for sonic."""
+"""Top-level package for zonic."""
 
 __author__ = """Simon Kerr"""
 __email__ = "jackofspaces@gmail.com"
@@ -12,16 +12,16 @@ from .hooks import hookspec
 
 # TODO: consider moving this out of init.py; is it bad practice?
 colorama.init()
-plugin_manager = pluggy.PluginManager("sonic")
+plugin_manager = pluggy.PluginManager("zonic")
 plugin_manager.add_hookspecs(hookspec)
 
-sonic_hookspec = hookspec.sonic_hookspec
-sonic_hookimpl = hookspec.sonic_hookimpl
+zonic_hookspec = hookspec.zonic_hookspec
+zonic_hookimpl = hookspec.zonic_hookimpl
 
 __all__ = [
     "Configuration",
     "plugin_manager",
     "hookspec",
-    "sonic_hookimpl",
-    "sonic_hookspec",
+    "zonic_hookimpl",
+    "zonic_hookspec",
 ]

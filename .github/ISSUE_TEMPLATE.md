@@ -1,4 +1,4 @@
-* sonic version:
+* zonic version:
 * Python version:
 * Operating System:
 

@@ -8,35 +8,35 @@ from typing import Sequence
 
 import pluggy
 
-from sonic import Configuration
+from zonic import Configuration
 
-sonic_hookspec = pluggy.HookspecMarker("sonic")
-sonic_hookimpl = pluggy.HookimplMarker("sonic")
+zonic_hookspec = pluggy.HookspecMarker("zonic")
+zonic_hookimpl = pluggy.HookimplMarker("zonic")
 
 
-@sonic_hookspec
-def sonic_add_options(parser: argparse.ArgumentParser) -> None:
+@zonic_hookspec
+def zonic_add_options(parser: argparse.ArgumentParser) -> None:
     """
     Bolt on command line options for the plugin
     """
 
 
-@sonic_hookspec
-def sonic_setup(config: Configuration) -> None:
+@zonic_hookspec
+def zonic_setup(config: Configuration) -> None:
     """
     Run basic setup!
     """
 
 
-@sonic_hookspec(firstresult=True)
-def sonic_execute(config: Configuration) -> Sequence[Optional[int]]:
+@zonic_hookspec(firstresult=True)
+def zonic_execute(config: Configuration) -> Sequence[Optional[int]]:
     """
     Run basic execution!
     """
 
 
-@sonic_hookspec
-def sonic_teardown(
+@zonic_hookspec
+def zonic_teardown(
     config: Configuration, vulnerable_ports: Sequence[Optional[int]]
 ) -> None:
     """
@@ -44,8 +44,8 @@ def sonic_teardown(
     """
 
 
-@sonic_hookspec
-def sonic_report(config: Configuration, ports: Sequence[Optional[int]]) -> None:
+@zonic_hookspec
+def zonic_report(config: Configuration, ports: Sequence[Optional[int]]) -> None:
     """
     Report the data about open ports!
     """
