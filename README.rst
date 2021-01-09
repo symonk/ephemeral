@@ -1,12 +1,9 @@
-<kbd>
-  <img src="https://github.com/symonk/zonic/blob/master/.github/images/logo.png">
-</kbd>
-  <p></p>
+.. image:: https://github.com/symonk/zonic/blob/master/.github/images/logo.png
+    :target:
 
 =========
 zonic
 =========
-
 
 .. image:: https://img.shields.io/pypi/v/zonic.svg
         :target: https://pypi.python.org/pypi/zonic
