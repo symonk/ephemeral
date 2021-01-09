@@ -1,3 +1,4 @@
+import argparse
 from datetime import datetime
 from typing import Optional
 from typing import Sequence
@@ -5,16 +6,16 @@ from typing import Sequence
 from colorama import Fore
 from pluggy import PluginManager
 
-from ephemeral import Configuration
-from ephemeral import ephemeral_hookimpl
-from ephemeral.scanner import PortScanner
+from sonic import Configuration
+from sonic import sonic_hookimpl
+from sonic.scanner import PortScanner
 
 
-class EphemeralCorePlugin:
+class SonicCorePlugin:
     def __init__(self, config: Configuration, plugin_manager: PluginManager) -> None:
         self.config = config
         self.plugin_manager = plugin_manager
-        self.name = "Ephemeral Base Plugin"
+        self.name = "Sonics Base Plugin"
         self.scanner = PortScanner(
             config.target,
             config.port_range,
@@ -23,9 +24,9 @@ class EphemeralCorePlugin:
             config.thread_count,
         )
 
-    @ephemeral_hookimpl
-    def ephemeral_setup(self) -> None:
-        print(f"**** Ephemeral started at: {self._get_datetime_now()}")
+    @sonic_hookimpl
+    def sonic_setup(self) -> None:
+        print(f"**** Sonic started at: {self._get_datetime_now()}")
         ignored = ("plugin_manager",)
         for setting, value in {
             k: v for k, v in vars(self.config).items() if k not in ignored
@@ -34,18 +35,18 @@ class EphemeralCorePlugin:
                 f"**** [{Fore.BLUE + setting + Fore.RESET} = {Fore.GREEN + str(value) + Fore.RESET}] *****"
             )
 
-    @ephemeral_hookimpl
-    def ephemeral_execute(self) -> Sequence[Optional[int]]:
-        return self.scanner.attack(self.config.random)
+    @sonic_hookimpl
+    def sonic_execute(self) -> Sequence[Optional[int]]:
+        return self.scanner.attack(self.config.get_option("random"))
 
-    @ephemeral_hookimpl
-    def ephemeral_teardown(
+    @sonic_hookimpl
+    def sonic_teardown(
         self, vulnerable_ports: Sequence[Optional[int]]
     ) -> Sequence[Optional[int]]:
         return []
 
-    @ephemeral_hookimpl
-    def ephemeral_report(self, ports: Sequence[Optional[int]]) -> None:
+    @sonic_hookimpl
+    def sonic_report(self, ports: Sequence[Optional[int]]) -> None:
         print(
             f"**** {Fore.RED}Vulnerable {Fore.RESET}ports => {Fore.YELLOW} {list(ports)} {Fore.RESET}"
         )

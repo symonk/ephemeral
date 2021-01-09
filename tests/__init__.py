@@ -1,1 +1,1 @@
-"""Unit test package for ephemeral."""
+"""Unit test package for sonic."""

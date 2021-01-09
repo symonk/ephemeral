@@ -9,7 +9,7 @@ from typing import Optional
 
 from halo import Halo
 
-from ephemeral.decorators import stdout_scan_time
+from sonic.decorators import stdout_scan_time
 
 
 class PortScanner:
@@ -22,7 +22,7 @@ class PortScanner:
         thread_count: int,
     ) -> None:
         self.target = socket.gethostbyname(target)
-        self.port_range = list(port_range)
+        self.port_range = port_range
         self.quick = quick
         self.random = random
         self.thread_count = thread_count

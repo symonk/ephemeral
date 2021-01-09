@@ -1,4 +1,4 @@
-* ephemeral version:
+* sonic version:
 * Python version:
 * Operating System:
 

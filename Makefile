@@ -48,7 +48,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint: ## check style with flake8
-	flake8 ephemeral tests
+	flake8 sonic tests
 
 test: ## run tests quickly with the default Python
 	pytest
@@ -57,15 +57,15 @@ test-all: ## run tests on every Python version with tox
 	tox
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source ephemeral -m pytest
+	coverage run --source sonic -m pytest
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/ephemeral.rst
+	rm -f docs/sonic.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ ephemeral
+	sphinx-apidoc -o docs/ sonicl
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html

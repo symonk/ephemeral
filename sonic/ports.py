@@ -1,8 +1,3 @@
-from typing import Iterable
-from typing import Optional
-
-import pluggy
-
 QUICK_PORTS = [
     1,
     3,
@@ -208,25 +203,3 @@ QUICK_PORTS = [
     49157,
     50000,
 ]
-
-
-class Configuration:
-    def __init__(
-        self,
-        verbose: bool,
-        target: str,
-        port_range: Optional[Iterable[int]],
-        quick: bool,
-        random: bool,
-        thread_count: bool,
-        plugin_manager: pluggy.PluginManager,
-        write_vulnerable: bool,
-    ) -> None:
-        self.verbose = verbose
-        self.target = target
-        self.port_range = port_range or range(2 ** 16) if not quick else QUICK_PORTS
-        self.quick = quick
-        self.random = random
-        self.thread_count = thread_count
-        self.plugin_manager = plugin_manager
-        self.write_vulnerable = write_vulnerable

@@ -1,4 +1,4 @@
-Welcome to ephemeral's documentation!
+Welcome to sonic's documentation!
 ======================================
 
 .. toctree::

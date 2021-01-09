@@ -25,5 +25,5 @@ deploy:
     secure: PLEASE_REPLACE_ME
   on:
     tags: true
-    repo: symonk/ephemeral
+    repo: symonk/sonic
     python: 3.8

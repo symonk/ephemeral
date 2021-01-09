@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use ephemeral in a project::
+To use sonic in a project::
 
-    import ephemeral
+    import sonic

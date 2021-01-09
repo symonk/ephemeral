@@ -3,18 +3,18 @@ from typing import Sequence
 
 from pluggy import PluginManager
 
-from ephemeral import Configuration
-from ephemeral import ephemeral_hookimpl
+from sonic import Configuration
+from sonic import sonic_hookimpl
 
 
-class EphemeralCSVPlugin:
+class SonicCSVPlugin:
     def __init__(self, config: Configuration, plugin_manager: PluginManager) -> None:
         self.config = config
         self.plugin_manager = plugin_manager
         self.name = "CSV Plugin"
 
-    @ephemeral_hookimpl
-    def ephemeral_teardown(
+    @sonic_hookimpl
+    def sonic_teardown(
         self, vulnerable_ports: Sequence[Optional[int]]
     ) -> Sequence[Optional[int]]:
         if vulnerable_ports and self.config.write_vulnerable:
