@@ -1,12 +1,12 @@
 [paths]
 source =
-   emphemeral
+   sonic
    */site-packages
 
 [run]
 branch = true
 source =
-    emphemeral
+    sonic
     tests
 parallel = true
 
