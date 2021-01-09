@@ -1,5 +1,7 @@
-.. image:: https://github.com/symonk/zonic/blob/master/.github/images/logo.png
-    :target:
+.. image:: .github/images/logo.png
+  :class: with-border
+  :width: 1280
+
 
 =========
 zonic
