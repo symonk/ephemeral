@@ -79,7 +79,7 @@ Ready to contribute? Here's how to set up `zonic` for local development.
 5. When you're done making changes, check that your changes pass flake8 and the
    tests, including testing other Python versions with tox::
 
-    $ flake8 sonic tests
+    $ flake8 zonic tests
     $ python setup.py test or pytest
     $ tox
 
@@ -103,7 +103,7 @@ Before you submit a pull request, check that it meets these guidelines:
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
 3. The pull request should work for Python 3.5, 3.6, 3.7 and 3.8, and for PyPy. Check
-   https://travis-ci.com/symonk/sonic/pull_requests
+   https://travis-ci.com/symonk/zonic/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
 Tips
@@ -111,7 +111,7 @@ Tips
 
 To run a subset of tests::
 
-$ pytest tests.test_sonic
+$ pytest tests.test_zonic
 
 
 Deploying

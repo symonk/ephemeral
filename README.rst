@@ -21,8 +21,8 @@ zonic
      :target: https://pyup.io/repos/github/symonk/zonic/
      :alt: Updates
 
-.. image:: https://results.pre-commit.ci/badge/github/symonk/sonic/master.svg
-   :target: https://results.pre-commit.ci/latest/github/symonk/sonic/master
+.. image:: https://results.pre-commit.ci/badge/github/symonk/zonic/master.svg
+   :target: https://results.pre-commit.ci/latest/github/symonk/zonic/master
    :alt: pre-commit.ci status
 
 
@@ -31,7 +31,7 @@ Port scanning made easy with python
 
 
 * Free software: MIT license
-* Documentation: https://sonic.readthedocs.io.
+* Documentation: https://zonic.readthedocs.io.
 
 --------
 Disclaimer
@@ -41,7 +41,5 @@ Do **not** use this against any environment in which you do not have complete, e
 Features
 --------
 
-* Simple port scanning
-* Powerful customisations
-* Result dispatching
-* Hook based extendibility
+* Simple port scanner
+* Extendible through a plugin system
