@@ -1,3 +1,4 @@
+import argparse
 from datetime import datetime
 from typing import List
 from typing import Optional
@@ -12,32 +13,86 @@ from zonic.scanner import PortScanner
 
 
 class ZonicCorePlugin:
-    def __init__(self, config: Configuration, plugin_manager: PluginManager) -> None:
-        self.config = config
+    def __init__(self, plugin_manager: PluginManager) -> None:
         self.plugin_manager = plugin_manager
         self.name = "Zonics Base Plugin"
-        self.scanner = PortScanner(
-            config.target,
-            config.port_range,
-            config.quick,
-            config.random,
-            config.thread_count,
+
+    @zonic_hookimpl
+    def zonic_add_options(self, parser: argparse.ArgumentParser) -> None:
+        parser.add_argument(
+            "--target",
+            action="store",
+            help="The target host to inspect available ports of.",
+        )
+        parser.add_argument(
+            "-v",
+            "--verbose",
+            action="store_true",
+            help="Run zonic in verbose mode",
+            dest="verbose",
+        )
+        parser.add_argument(
+            "-q",
+            "--quick",
+            action="store_true",
+            help="Scan only the top 100 popular open ports",
+            dest="quick",
+        )
+        parser.add_argument(
+            "-r",
+            "--random",
+            action="store_true",
+            help="Scan ports in the port range randomly, not sequentially.",
+            dest="random",
+        )
+        parser.add_argument(
+            "-tc",
+            "--thread-count",
+            action="store",
+            type=int,
+            default=5_000,
+            help="How many threads should scanning use, this depends heavily on available memory, tweak accordingly.",
+            dest="thread_count",
+        )
+        parser.add_argument(
+            "-pr",
+            "--ports",
+            action="store",
+            type=int,
+            default=range(65536),
+            help="Specify the port range to perform a scan on.",
+            dest="port_range",
+        )
+        parser.add_argument(
+            "-wv",
+            "--write-vulnerable",
+            action="store_true",
+            default=False,
+            help="If vulnerable ports are detected; write them to csv in the cwd",
+            dest="write_vulnerable",
         )
 
     @zonic_hookimpl
-    def zonic_setup(self) -> None:
+    def zonic_setup(self, config: Configuration) -> None:
         print(f"**** zonic started at: {self._get_datetime_now()}")
         ignored = ("plugin_manager",)
         for setting, value in {
-            k: v for k, v in vars(self.config).items() if k not in ignored
+            k: v for k, v in vars(config).items() if k not in ignored
         }.items():
             print(
                 f"**** [{Fore.BLUE + setting + Fore.RESET} = {Fore.GREEN + str(value) + Fore.RESET}] *****"
             )
 
     @zonic_hookimpl
-    def zonic_execute(self) -> List[Optional[int]]:
-        return [int(x) for x in self.scanner.attack(self.config.get_option("random"))]
+    def zonic_execute(self, config: Configuration) -> List[Optional[int]]:
+        scanner = PortScanner(
+            config.target,
+            config.port_range,
+            config.quick,
+            config.random,
+            config.thread_count,
+        )
+        return [int(x) for x in scanner.attack(config.get_option("random"))]
 
     @zonic_hookimpl
     def zonic_teardown(

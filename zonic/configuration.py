@@ -5,6 +5,8 @@ from typing import Optional
 
 import pluggy
 
+from zonic.ports import QUICK_PORTS
+
 
 class Configuration:
     def __init__(
@@ -32,6 +34,8 @@ class Configuration:
     def port_range(self) -> List[int]:
         port_range = self.get_option("port_range")
         assert port_range is not None
+        if self.quick:
+            return [x for x in QUICK_PORTS]
         return [int(x) for x in port_range]
 
     @property
