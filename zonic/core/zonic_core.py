@@ -1,5 +1,6 @@
 from datetime import datetime
-from typing import Optional, List
+from typing import List
+from typing import Optional
 from typing import Sequence
 
 from colorama import Fore
