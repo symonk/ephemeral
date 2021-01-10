@@ -1,6 +1,6 @@
 from typing import Any
 from typing import List
-from typing import MutableMapping
+from typing import Mapping
 from typing import Optional
 
 import pluggy
@@ -9,7 +9,7 @@ import pluggy
 class Configuration:
     def __init__(
         self,
-        options: MutableMapping[str, Any],
+        options: Mapping[str, Any],
         plugin_manager: pluggy.PluginManager,
     ) -> None:
         self.options = options
