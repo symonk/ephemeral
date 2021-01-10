@@ -19,7 +19,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../zonic/'))
+sys.path.insert(0, os.path.abspath('../../zonic'))
 
 project = 'zonic'
 copyright = '2021, Simon Kerr'
