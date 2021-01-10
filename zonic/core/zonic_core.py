@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 from typing import Sequence
 
 from colorama import Fore
@@ -35,8 +35,8 @@ class ZonicCorePlugin:
             )
 
     @zonic_hookimpl
-    def zonic_execute(self) -> Sequence[Optional[int]]:
-        return self.scanner.attack(self.config.get_option("random"))
+    def zonic_execute(self) -> List[Optional[int]]:
+        return [int(x) for x in self.scanner.attack(self.config.get_option("random"))]
 
     @zonic_hookimpl
     def zonic_teardown(

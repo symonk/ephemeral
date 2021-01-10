@@ -1,5 +1,4 @@
-from zonic import Configuration
 
 
-def test_stub():
-    assert Configuration(None, None)
+def test_stub() -> None:
+    assert True
