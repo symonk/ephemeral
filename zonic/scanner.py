@@ -3,7 +3,6 @@ from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import as_completed
 from queue import Queue
 from random import shuffle
-from typing import Iterable
 from typing import List
 from typing import Optional
 
@@ -16,7 +15,7 @@ class PortScanner:
     def __init__(
         self,
         target: str,
-        port_range: Iterable[int],
+        port_range: List[int],
         quick: bool,
         random: bool,
         thread_count: int,
