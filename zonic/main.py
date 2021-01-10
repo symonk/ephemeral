@@ -68,7 +68,7 @@ def main():
     welcome()
     parser = argparse.ArgumentParser()
     plugin_manager.register(__file__, "zonic_main")
-    plugin_options = plugin_manager.hook.zonic_add_options(parser=parser)
+    plugin_manager.hook.zonic_add_options(parser=parser)
     return 0
 
 

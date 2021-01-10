@@ -17,7 +17,7 @@ class ZonicCSVPlugin:
     def zonic_teardown(
         self, vulnerable_ports: Sequence[Optional[int]]
     ) -> Sequence[Optional[int]]:
-        if vulnerable_ports and self.config.write_vulnerable:
+        if vulnerable_ports and self.config.get_option("write_vulnerable"):
             print("**** Writing vulnerable ports to disk, see: `vulnerable_ports.csv`")
             with open("vulnerable_ports.csv", "w") as f:
                 f.write(f"[Target]: {self.config.target}\n")

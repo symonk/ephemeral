@@ -1,6 +1,6 @@
 from typing import Any
-from typing import Iterable
-from typing import Mapping
+from typing import List
+from typing import MutableMapping
 from typing import Optional
 
 import pluggy
@@ -8,7 +8,9 @@ import pluggy
 
 class Configuration:
     def __init__(
-        self, options: Mapping[Any, Any], plugin_manager: pluggy.PluginManager
+        self,
+        options: MutableMapping[str, Any],
+        plugin_manager: pluggy.PluginManager,
     ) -> None:
         self.options = options
         self.plugin_manager = plugin_manager
@@ -22,23 +24,33 @@ class Configuration:
 
     @property
     def target(self) -> str:
-        return self.get_option("target")
+        target = self.get_option("target")
+        assert isinstance(target, str)
+        return target
 
     @property
-    def port_range(self) -> Iterable[int]:
-        return self.get_option("port_range")
+    def port_range(self) -> List[int]:
+        port_range = self.get_option("port_range")
+        assert port_range is not None
+        return [int(x) for x in port_range]
 
     @property
     def quick(self) -> bool:
-        return self.get_option("quick")
+        quick = self.get_option("quick")
+        assert isinstance(quick, bool)
+        return quick
 
     @property
     def random(self) -> bool:
-        return self.get_option("random")
+        random = self.get_option("random")
+        assert isinstance(random, bool)
+        return random
 
     @property
     def thread_count(self) -> int:
-        return self.get_option("thread_count")
+        thread_count = self.get_option("thread_count")
+        assert isinstance(thread_count, int)
+        return thread_count
 
     def __repr__(self) -> str:
         return f"Configuration=(options={repr(self.options)}"
