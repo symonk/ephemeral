@@ -26,8 +26,11 @@ def main():
 
 def _register_core_plugins(plugin_manager: PluginManager) -> None:
     from zonic.core.zonic_core import ZonicCorePlugin
+    from zonic.core.zonic_csv import ZonicCSVPlugin
 
     core_plugin = ZonicCorePlugin(plugin_manager)
+    csv_plugin = ZonicCSVPlugin(plugin_manager)
+    plugin_manager.register(plugin=csv_plugin, name=csv_plugin.name)
     plugin_manager.register(plugin=core_plugin, name=core_plugin.name)
 
 

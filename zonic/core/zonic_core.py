@@ -63,14 +63,6 @@ class ZonicCorePlugin:
             help="Specify the port range to perform a scan on.",
             dest="port_range",
         )
-        parser.add_argument(
-            "-wv",
-            "--write-vulnerable",
-            action="store_true",
-            default=False,
-            help="If vulnerable ports are detected; write them to csv in the cwd",
-            dest="write_vulnerable",
-        )
 
     @zonic_hookimpl
     def zonic_setup(self, config: Configuration) -> None:
