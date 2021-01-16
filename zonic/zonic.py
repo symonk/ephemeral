@@ -1,5 +1,6 @@
 """Console script for zonic."""
 import argparse
+import socket
 import sys
 
 import colorama
@@ -25,6 +26,7 @@ def parse_sysargv() -> argparse.Namespace:
         action="store",
         required=True,
         dest="target",
+        type=socket.gethostbyname,
         metavar="localhost",
         help="Target host used for port inspection.",
     )
