@@ -25,6 +25,9 @@ zonic
    :target: https://results.pre-commit.ci/latest/github/symonk/zonic/master
    :alt: pre-commit.ci status
 
+.. image:: https://codecov.io/gh/symonk/zonic/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/symonk/zonic
+
 
 
 Port scanning made easy with python
