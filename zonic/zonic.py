@@ -19,16 +19,17 @@ def parse_sysargv() -> argparse.Namespace:
     """
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        "-t",
         "--target",
         action="store",
         required=True,
-        help="The target host to inspect available ports of.",
+        help="Target host used for port inspection.",
     )
     parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
-        help="Run zonic in verbose mode",
+        help="Increase verbosity, zonic supports a simple ON|OFF verbosity level over count(-vvv) etc.",
         dest="verbose",
         default=False,
     )
@@ -36,14 +37,15 @@ def parse_sysargv() -> argparse.Namespace:
         "-q",
         "--quick",
         action="store_true",
-        help="Scan only the top 100 popular open ports",
+        help="Scan the range of common ports, disregarding --port-range.",
         dest="quick",
     )
     parser.add_argument(
         "-i",
         "--irregular",
         action="store_true",
-        help="Scan ports in the port range randomly, not sequentially.",
+        help="Ports are randomly scanned (even when threading the workload) to avoid sequential execution "
+        "Some systems can spot the pattern originating and activate blocking mechanism quicker.",
         dest="irregular",
     )
     parser.add_argument(
@@ -52,16 +54,17 @@ def parse_sysargv() -> argparse.Namespace:
         action="store",
         type=int,
         default=5_000,
-        help="How many threads should scanning use, this depends heavily on available memory, tweak accordingly.",
+        help="Number of threads to use for scanning, scanning is IO bound and substancial performance"
+        "gains can be had (at the price of load on the target host)",
         dest="thread_count",
     )
     parser.add_argument(
         "-pr",
-        "--ports",
+        "--port-range",
         action="store",
         type=int,
         default=range(65536),
-        help="Specify the port range to perform a scan on.",
+        help="Specifying a port range",
         dest="port_range",
     )
     parser.add_argument(
@@ -69,7 +72,7 @@ def parse_sysargv() -> argparse.Namespace:
         "--csv-output",
         action="store_true",
         default=False,
-        help="If vulnerable ports are detected; write them to csv in the cwd",
+        help="Write the vulnerable ports to a csv file in the current working directory.",
         dest="csv_output",
     )
     return parser.parse_args()
