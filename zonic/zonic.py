@@ -9,6 +9,7 @@ from .impl import Attacker
 from .impl import Scanner
 from .impl import Writer
 from .instance import ZonicInstance
+from .utility.argparsing import RangeAction
 
 
 def parse_sysargv() -> argparse.Namespace:
@@ -23,6 +24,8 @@ def parse_sysargv() -> argparse.Namespace:
         "--target",
         action="store",
         required=True,
+        dest="target",
+        metavar="localhost",
         help="Target host used for port inspection.",
     )
     parser.add_argument(
@@ -53,7 +56,8 @@ def parse_sysargv() -> argparse.Namespace:
         "--thread-count",
         action="store",
         type=int,
-        default=5_000,
+        default=1_000,
+        metavar="2000",
         help="Number of threads to use for scanning, scanning is IO bound and substancial performance"
         "gains can be had (at the price of load on the target host)",
         dest="thread_count",
@@ -61,9 +65,9 @@ def parse_sysargv() -> argparse.Namespace:
     parser.add_argument(
         "-pr",
         "--port-range",
-        action="store",
-        type=int,
+        action=RangeAction,
         default=range(65536),
+        metavar="22-8080",
         help="Specifying a port range",
         dest="port_range",
     )
@@ -90,5 +94,10 @@ def main():
     zonic.attack()
 
 
-if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover
+def init() -> None:
+    # unit testable
+    if __name__ == "__main__":
+        sys.exit(main())  # pragma: no cover
+
+
+init()
