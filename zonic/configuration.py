@@ -1,60 +1,32 @@
-from typing import Any
-from typing import List
-from typing import Mapping
-from typing import Optional
-
-import pluggy
-
-from zonic.ports import QUICK_PORTS
+from typing import Iterable
 
 
 class Configuration:
     def __init__(
         self,
-        options: Mapping[str, Any],
-        plugin_manager: pluggy.PluginManager,
+        target: str,
+        verbose: bool,
+        quick: bool,
+        irregular: bool,
+        thread_count: int,
+        port_range: Iterable[int],
+        csv_output: bool,
     ) -> None:
-        self.options = options
-        self.plugin_manager = plugin_manager
-
-    def get_option(self, option: str) -> Optional[Any]:
-        """
-        Fetches a command line option from the config.
-        Config options need to be dynamic because arbitrary third party plugins can add their own options
-        """
-        return self.options.get(option)
-
-    @property
-    def target(self) -> str:
-        target = self.get_option("target")
-        assert isinstance(target, str)
-        return target
-
-    @property
-    def port_range(self) -> List[int]:
-        port_range = self.get_option("port_range")
-        assert port_range is not None
-        if self.quick:
-            return [x for x in QUICK_PORTS]
-        return [int(x) for x in port_range]
-
-    @property
-    def quick(self) -> bool:
-        quick = self.get_option("quick")
-        assert isinstance(quick, bool)
-        return quick
-
-    @property
-    def random(self) -> bool:
-        random = self.get_option("random")
-        assert isinstance(random, bool)
-        return random
-
-    @property
-    def thread_count(self) -> int:
-        thread_count = self.get_option("thread_count")
-        assert isinstance(thread_count, int)
-        return thread_count
+        self.target = target
+        self.verbose = verbose
+        self.quick = quick
+        self.irregular = irregular
+        self.thread_count = thread_count
+        self.port_range = port_range
+        self.csv_output = csv_output
 
     def __repr__(self) -> str:
-        return f"Configuration=(options={repr(self.options)}"
+        return (
+            f"Configuration(target={self.target}, "
+            f"verbose={self.verbose}, "
+            f"quick={self.quick}, "
+            f"irregular={self.irregular}, "
+            f"thread_count={self.thread_count}, "
+            f"port_range={self.port_range}, "
+            f"csv_output={self.csv_output})"
+        )
