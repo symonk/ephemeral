@@ -27,25 +27,45 @@ class ZonicInstance:
         """
         template = StringTemplate(
             message=r"""
-        ===================================================== {0}
-         ______     ______     __   __     __     ______
-        /\___  \   /\  __ \   /\ "-.\ \   /\ \   /\  ___\
-        \/_/  /__  \ \ \/\ \  \ \ \-.  \  \ \ \  \ \ \____
-          /\_____\  \ \_____\  \ \_\\"\_\  \ \_\  \ \_____\
-          \/_____/   \/_____/   \/_/ \/_/   \/_/   \/_____/
-
-
-        {1}===================================================== {2}
-         Zonic: Powerful python port scanner, https://github.com/symonk/zonic
-            {3}""",
+{0} ================================================= {1}{2}
+ ______     ______     __   __     __     ______
+/\___  \   /\  __ \   /\ "-.\ \   /\ \   /\  ___\
+\/_/  /__  \ \ \/\ \  \ \ \-.  \  \ \ \  \ \ \____
+  /\_____\  \ \_____\  \ \_\\"\_\  \ \_\  \ \_____\
+  \/_____/   \/_____/   \/_/ \/_/   \/_/   \/_____/
+{3}""",
             colour_options=(
-                colorama.Fore.LIGHTBLUE_EX,
+                colorama.Fore.BLUE,
                 colorama.Fore.RESET,
-                colorama.Fore.WHITE,
+                colorama.Fore.LIGHTYELLOW_EX,
                 colorama.Fore.RESET,
             ),
         )
         self.write(template)
+
+    def display_configuration(self) -> None:
+        self.write(
+            StringTemplate(
+                "{0}={1}" * 50, colour_options=(colorama.Fore.BLUE, colorama.Fore.RESET)
+            )
+        )
+        self.write(
+            StringTemplate(
+                "Zonic: Powerful python port scanner, https://github.com/symonk/zonic"
+            )
+        )
+        for opt, val in self.config.__dict__.items():
+            self.write(
+                StringTemplate(
+                    "    Option: {0}{1}{2} => {3}",
+                    colour_options=(colorama.Fore.GREEN, opt, colorama.Fore.RESET, val),
+                )
+            )
+        self.write(
+            StringTemplate(
+                "{0}={1}" * 50, colour_options=(colorama.Fore.BLUE, colorama.Fore.RESET)
+            )
+        )
 
     def execute(self) -> int:
         ...

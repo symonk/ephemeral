@@ -91,6 +91,7 @@ def main():
     zonic = ZonicInstance(
         config=config, scannable=scanner, attackable=attacker, writable=Writer()
     )
+    zonic.display_configuration()
     zonic.attack()
 
 
