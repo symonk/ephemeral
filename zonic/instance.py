@@ -1,12 +1,14 @@
-import typing
+from random import shuffle
+from typing import List
 
 import colorama
-from halo import Halo
 
 from .abc.base_classes import Attackable
 from .abc.base_classes import Scanable
 from .abc.base_classes import Writable
 from .configuration import Configuration
+from .constants import QUICK_PORTS
+from .results import ScanResult
 from .utility.string_utils import StringTemplate
 
 
@@ -19,10 +21,24 @@ class ZonicInstance:
         writable: Writable,
     ) -> None:
         self.config = config
-        self._scannable = scannable
-        self._attackable = attackable
-        self._writable = writable
+        self.scannable = scannable
+        self.attackable = attackable
+        self.writable = writable
         self._welcome()
+
+    @property
+    def scannable_ports(self) -> List[int]:
+        def sort_order_ports(randomize: bool) -> List[int]:
+            ports = list(self.config.port_range)
+            if randomize:
+                shuffle(ports)
+            return ports
+
+        return (
+            QUICK_PORTS
+            if self.config.quick
+            else sort_order_ports(self.config.irregular)
+        )
 
     def _welcome(self) -> None:
         """
@@ -70,21 +86,22 @@ class ZonicInstance:
             )
         )
 
-    def execute(self) -> int:
-        ...
-
-    def scan(self, port: int) -> typing.Tuple[int, bool, int]:
-        return self._scannable.scan(port)  # type: ignore
-
-    def attack(self) -> None:
-        results = []
-        with Halo(text="***** Port scanning in progress...", color="blue"):
-            for port in self.config.port_range:
-                result = self.scan(port)
-                self.write(
-                    StringTemplate(message=f"Port result for port: {port}: {result}")
+    def perform_scan(self) -> List[ScanResult]:
+        result_set: List[ScanResult] = self.scannable.scan_ports(self.scannable_ports)
+        for result in result_set:
+            self.write(
+                StringTemplate(
+                    "Port {0}{1}{2} is {3}vulnerable{4}",
+                    (
+                        colorama.Fore.RED,
+                        str(result.port).ljust(5, " "),
+                        colorama.Fore.RESET,
+                        colorama.Fore.RED,
+                        colorama.Fore.RESET,
+                    ),
                 )
-                results.append(result)
+            )
+        return result_set
 
     def write(self, template: StringTemplate, flush: bool = True) -> None:
-        self._writable.write(template=template, flush=flush)
+        self.writable.write(template=template, flush=flush)

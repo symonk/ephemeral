@@ -6,7 +6,7 @@ import sys
 import colorama
 
 from .configuration import Configuration
-from .impl import Attacker
+from .impl import Exploiter
 from .impl import Scanner
 from .impl import Writer
 from .instance import ZonicInstance
@@ -58,10 +58,10 @@ def parse_sysargv() -> argparse.Namespace:
         "--thread-count",
         action="store",
         type=int,
-        default=1_000,
-        metavar="2000",
+        default=1,
+        metavar="250",
         help="Number of threads to use for scanning, scanning is IO bound and substancial performance"
-        "gains can be had (at the price of load on the target host)",
+        "gains can be had (at the price of load on the target host).  By default Zonic runs sequentially.",
         dest="thread_count",
     )
     parser.add_argument(
@@ -88,13 +88,9 @@ def main():
     colorama.init()
     namespace = parse_sysargv()
     config = Configuration(**vars(namespace))
-    scanner = Scanner(config)
-    attacker = Attacker()
-    zonic = ZonicInstance(
-        config=config, scannable=scanner, attackable=attacker, writable=Writer()
-    )
+    zonic = ZonicInstance(config, Scanner(config), Exploiter(config), Writer())
     zonic.display_configuration()
-    zonic.attack()
+    zonic.perform_scan()
 
 
 def init() -> None:

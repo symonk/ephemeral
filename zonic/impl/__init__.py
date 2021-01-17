@@ -1,5 +1,5 @@
-from .attacker import Attacker
+from .exploiter import Exploiter
 from .scanner import Scanner
 from .writer import Writer
 
-__all__ = ["Attacker", "Scanner", "Writer"]
+__all__ = ["Exploiter", "Scanner", "Writer"]

@@ -13,7 +13,7 @@ class StringTemplate:
     def __init__(
         self,
         message: str,
-        colour_options: typing.Optional[typing.Tuple[str, ...]] = None,
+        colour_options: typing.Optional[typing.Tuple[typing.Any, ...]] = None,
     ) -> None:
         self.message = message
         self.colour_options = colour_options
