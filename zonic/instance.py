@@ -1,4 +1,7 @@
+import typing
+
 import colorama
+from halo import Halo
 
 from .abc.base_classes import Attackable
 from .abc.base_classes import Scanable
@@ -70,11 +73,18 @@ class ZonicInstance:
     def execute(self) -> int:
         ...
 
-    def scan(self) -> None:
-        ...
+    def scan(self, port: int) -> typing.Tuple[int, bool, int]:
+        return self._scannable.scan(port)  # type: ignore
 
     def attack(self) -> None:
-        ...
+        results = []
+        with Halo(text="***** Port scanning in progress...", color="blue"):
+            for port in self.config.port_range:
+                result = self.scan(port)
+                self.write(
+                    StringTemplate(message=f"Port result for port: {port}: {result}")
+                )
+                results.append(result)
 
     def write(self, template: StringTemplate, flush: bool = True) -> None:
         self._writable.write(template=template, flush=flush)

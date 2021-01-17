@@ -17,11 +17,11 @@ class Attackable(abc.ABC):
 
 class Scanable(abc.ABC):
     @abc.abstractmethod
-    def scan(self, port: int) -> typing.Tuple[int, bool]:
+    def scan(self, port: int) -> typing.Tuple[int, bool, int]:
         """
         Perform a port scan against a particular port.
         :param port: The port (integer) to perform the scan against
-        :return: A tuple of (port_number, boolean to indicate if port was considered `open`
+        :return: A tuple of (port_number, boolean, ACK sequence) to indicate if port was considered `open`
         """
         ...
 
